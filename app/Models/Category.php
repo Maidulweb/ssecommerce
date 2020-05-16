@@ -8,13 +8,6 @@ class Category extends Model
 {
     protected $guarded = [];
 
-    protected static function booted()
-    {
-        static::created(function ($user) {
-            $user->slug = str_slug($user->name);
-        });
-    }
-
     public function parrent_category ()
     {
         return $this->belongsTo(Category::class);
