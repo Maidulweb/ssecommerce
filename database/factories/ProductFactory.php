@@ -13,6 +13,7 @@ $factory->define(Product::class, function (Faker $faker) {
         'category_id' => Category::all()->random()->id,
         'title' => $title,
         'slug' => $slug,
+        'image' => $faker->imageUrl,
         'description' => $faker->realText,
         'price' => '500',
 

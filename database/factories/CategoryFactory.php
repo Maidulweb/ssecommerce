@@ -14,6 +14,6 @@ $factory->define(Category::class, function (Faker $faker) {
     return [
         'name' => $title,
         'slug' => $slug,
-        'banner' => $faker->image
+        'banner' => $faker->imageUrl
     ];
 });
