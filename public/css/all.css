@@ -1,3 +1,7 @@
+img {
+    max-width: 100%;
+}
+
 :root {
     --jumbotron-padding-y: 3rem;
   }
