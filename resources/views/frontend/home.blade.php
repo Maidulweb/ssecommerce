@@ -1,6 +1,7 @@
 @extends('frontend.layouts.master')
 
 @section('content')
+@include('frontend.partials.category')
 <div class="album py-5 bg-light">
     <div class="container">
 

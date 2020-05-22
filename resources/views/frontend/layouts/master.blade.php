@@ -14,8 +14,6 @@
           @include('frontend.partials.header')
           <main role="main">
 
-            @include('frontend.partials.category')
-
             @yield('content')
           </main>
 

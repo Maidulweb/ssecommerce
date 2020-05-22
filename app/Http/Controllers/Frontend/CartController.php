@@ -10,7 +10,11 @@ class CartController extends Controller
 {
     public function showCart ()
     {
-dd(session()->get('cart'));
+        $data = [];
+
+        $data['cart'] = session()->has('cart') ? session()->get('cart') : [];
+        
+        return view('frontend.products.cart', $data);
     }
 
     public function addToCart (Request $request)
@@ -40,6 +44,8 @@ dd(session()->get('cart'));
         }
 
         session(['cart' => $cart]);
+
+        session()->flash('message', $product->title.'added to cart successfully');
 
         return redirect()->route('cart.show');
     }
