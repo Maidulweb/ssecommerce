@@ -13,7 +13,8 @@ class CartController extends Controller
         $data = [];
 
         $data['cart'] = session()->has('cart') ? session()->get('cart') : [];
-        
+        $data['total'] = array_sum(array_column($data['cart'], 'total_price'));
+
         return view('frontend.products.cart', $data);
     }
 
@@ -31,15 +32,22 @@ class CartController extends Controller
 
         $product = Product::findOrFail($request->input('product_id'));
 
+        $unit_price = ($product->sale_price !== null && $product->sale_price > 0)?$product->sale_price : $product->price;
+
         $cart = session()->has('cart') ? session()->get('cart') : [];
 
         if(array_key_exists($product->id, $cart)) {
+
             $cart[$product->id]['quantity']++;
+
+            $cart[$product->id]['total_price'] = $cart[$product->id]['quantity'] * $cart[$product->id]['unit_price'];
+
         }else {
             $cart[$product->id] = [
                 'title' => $product->title,
                 'quantity' =>1,
-                'price' => ($product->sale_price !== null && $product->sale_price > 0)?$product->sale_price : $product->price,
+                'unit_price' => $unit_price ,
+                'total_price' => $unit_price ,
             ];
         }
 
@@ -48,5 +56,39 @@ class CartController extends Controller
         session()->flash('message', $product->title.'added to cart successfully');
 
         return redirect()->route('cart.show');
+    }
+
+    public function removeFromCart(Request $request)
+    {
+
+        try{
+            $this->validate($request, [
+             'product_id' => 'required|numeric'
+            ]);
+
+        }catch(ValidationException $e)
+        {
+            return redirect()->back();
+        }
+
+        $cart = session()->has('cart') ? session()->get('cart') : [];
+
+        unset($cart[$request->input('product_id')]);
+
+        session(['cart'=>$cart]);
+
+        session()->flash('message', 'Remove your product from cart successfully');
+
+        return redirect()->back();
+
+    }
+
+    public function clearCart()
+    {
+        session(['cart' => []]);
+
+        session()->flash('message', 'Clear all cart');
+
+        return redirect()->back();
     }
 }

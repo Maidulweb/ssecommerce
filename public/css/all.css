@@ -47,4 +47,9 @@ img {
       list-style: none;
   }
 
+  .h2-padd {
+      padding: 30px 0;
+      text-align: center;
+  }
+
 /*responsive*/

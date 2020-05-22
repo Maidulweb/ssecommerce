@@ -20,7 +20,7 @@
           <li> <a href="">Profile</a></li>
           <li> <a href="">Logout</a></li>
           @endauth
-          <li> <a href="">Cart</a></li>
+          <li> <a href="{{ route('cart.show') }}">Cart</a></li>
         </ul>
       </div>
     </div>

@@ -23,7 +23,7 @@
                 <form action="{{ route('cart.add') }}" method="post">
                     @csrf
                   <input type="hidden" name="product_id" value="{{ $productdetails->id }}">
-                  <button type="button" class="btn btn-sm btn-outline-secondary">Add to cart</button>
+                  <button type="submit" class="btn btn-sm btn-outline-secondary">Add to cart</button>
                 </form>
             </div>
         </div>
