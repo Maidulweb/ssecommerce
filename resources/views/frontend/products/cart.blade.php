@@ -48,6 +48,7 @@
         </tbody>
       </table>
       <div class="text-right">
+        <a href="{{ route('checkout') }}" class="btn btn-lg btn-success">Checkout</a>
         <a href="{{ route('cart.clear') }}" class="btn btn-lg btn-danger">Clear all cart</a>
       </div>
       @endif
